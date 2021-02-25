@@ -35,26 +35,25 @@ public class llamadaentrante extends BroadcastReceiver {
                 switch (tm.getCallState()) {
                     // SI EL ESTADO DEL MANAGER ES UN RINGING ES PORQUE HAY UNA LLAMADA ENTRANTE O SONANDO, ENTONCES CAPTURAMOS EL NUMERO TELEFONICO.
                     case TelephonyManager.CALL_STATE_RINGING:
-                        /**incomingFlag = true;
-                        incoming_number = intent.getStringExtra("incoming_number"); //OBTENEMOS EL NUMERO DESDE EL INTENT.
-                        Toast.makeText(context, "RINGING :" + incoming_number, Toast.LENGTH_LONG).show();
-                        SmsManager smgr = SmsManager.getDefault(); //CREANDO UN OBJETO DE SMS MANAGER.
-                        smgr.sendTextMessage(incoming_number, null, mensajeGuardado, null, null); // ENVIAMOS EL SMS CON EL MENSAJE GUARDADO Y EL NUMERO TELEFONICO.
-                        Toast.makeText(context, "Enviando mensaje a :" + incoming_number + " " + mensajeGuardado, Toast.LENGTH_LONG).show();*/
-                        Toast.makeText(context,"Ringing", Toast.LENGTH_LONG).show();
-                        break;
-                    // SI CONTESTAS LA LLAMADA.
-                    case TelephonyManager.CALL_STATE_OFFHOOK:
                         incomingFlag = true;
                         incoming_number = intent.getStringExtra("incoming_number"); //OBTENEMOS EL NUMERO DESDE EL INTENT.
                         Toast.makeText(context, "RINGING :" + incoming_number, Toast.LENGTH_LONG).show();
-                        SmsManager smgr = SmsManager.getDefault(); //CREANDO UN OBJETO DE SMS MANAGER.
-                        smgr.sendTextMessage(incoming_number, null, mensajeGuardado, null, null); // ENVIAMOS EL SMS CON EL MENSAJE GUARDADO Y EL NUMERO TELEFONICO.
-                        Toast.makeText(context, "Enviando mensaje a :" + incoming_number + " " + mensajeGuardado, Toast.LENGTH_LONG).show();
-                        /**if (incomingFlag) {
+                        try{
+                            SmsManager smgr = SmsManager.getDefault(); //CREANDO UN OBJETO DE SMS MANAGER.
+                            smgr.sendTextMessage(incoming_number, null, mensajeGuardado, null, null); // ENVIAMOS EL SMS CON EL MENSAJE GUARDADO Y EL NUMERO TELEFONICO.
+                            Toast.makeText(context, "Enviando mensaje a :" + incoming_number + " " + mensajeGuardado, Toast.LENGTH_LONG).show();
+                            Toast.makeText(context,"Ringing", Toast.LENGTH_LONG).show();
+                        }catch (Exception e){
+                            Toast.makeText(context,"Error: "+e, Toast.LENGTH_LONG).show();
+                        }
+
+                        break;
+                    // SI CONTESTAS LA LLAMADA.
+                    case TelephonyManager.CALL_STATE_OFFHOOK:
+                        if (incomingFlag) {
                             Toast.makeText(context, "contesto e incomming accept", Toast.LENGTH_LONG).show();
                             Log.i(TAG, "incoming ACCEPT :" + incoming_number);
-                        }*/
+                        }
                         break;
                     //AL TERMINAR LA LLAMADA
                     case TelephonyManager.CALL_STATE_IDLE:
