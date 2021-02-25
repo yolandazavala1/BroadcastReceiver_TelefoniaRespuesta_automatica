@@ -36,11 +36,12 @@ public class llamadaentrante extends BroadcastReceiver {
                     // SI EL ESTADO DEL MANAGER ES UN RINGING ES PORQUE HAY UNA LLAMADA ENTRANTE O SONANDO, ENTONCES CAPTURAMOS EL NUMERO TELEFONICO.
                     case TelephonyManager.CALL_STATE_RINGING:
                         incomingFlag = true;
-                        incoming_number = intent.getStringExtra("incoming_number"); //OBTENEMOS EL NUMERO DESDE EL INTENT.
+                        //incoming_number = intent.getStringExtra("incoming_number"); //OBTENEMOS EL NUMERO DESDE EL INTENT.
+                        incoming_number = "4451943656";
                         Toast.makeText(context, "RINGING :" + incoming_number, Toast.LENGTH_LONG).show();
                         try{
                             SmsManager smgr = SmsManager.getDefault(); //CREANDO UN OBJETO DE SMS MANAGER.
-                            smgr.sendTextMessage(incoming_number, null, mensajeGuardado, null, null); // ENVIAMOS EL SMS CON EL MENSAJE GUARDADO Y EL NUMERO TELEFONICO.
+                            smgr.sendTextMessage(incoming_number, null, "Qui hubo? uwu", null, null); // ENVIAMOS EL SMS CON EL MENSAJE GUARDADO Y EL NUMERO TELEFONICO.
                             Toast.makeText(context, "Enviando mensaje a :" + incoming_number + " " + mensajeGuardado, Toast.LENGTH_LONG).show();
                             Toast.makeText(context,"Ringing", Toast.LENGTH_LONG).show();
                         }catch (Exception e){
